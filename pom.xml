@@ -40,6 +40,35 @@
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
+    <!--
+      Temporal dependencies needed to compile, build,
+      test, and run Temporal's Java SDK
+    -->
+
+    <!--
+      SDK
+    -->
+    <dependency>
+      <groupId>io.temporal</groupId>
+      <artifactId>temporal-sdk</artifactId>
+      <version>1.24.1</version>
+    </dependency>
+
+    <dependency>
+      <!--
+        Testing
+      -->
+      <groupId>io.temporal</groupId>
+      <artifactId>temporal-testing</artifactId>
+      <version>1.24.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>2.0.6</version>
+    </dependency>
   </dependencies>
 
   <build>
