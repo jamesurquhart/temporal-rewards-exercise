@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package com.jamesurquhart.rewards;
 
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowStub;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.serviceclient.WorkflowServiceStubsOptions;
+import io.temporal.workflow.Workflow;
 import java.time.Duration;
 
 /**
@@ -50,11 +47,13 @@ public class SimpleRewardsProgramActions {
         */
 
         workflow.addPoints(501);
+        System.out.print("\naddPoints signal sent a second time. Checking getRewardsProgramData Query next.\n");
+
         rewardsAccount = workflow.getRewardsProgramData();
-        System.out.printf("\nAnother 501 points added. New balance is %s. New status is %s", rewardsAccount.points, rewardsAccount.status.toString());
+        System.out.printf("\nAnother 501 points added. New balance is %s. New status is %s\n", rewardsAccount.points, rewardsAccount.status.toString());
         
         workflow.cancelRewardsProgram();
-        System.out.print("Rewards program cancelled. Check to see if workflow completed.");
+        System.out.print("\nRewards program cancelled. Check to see if workflow completed.\n");
     }
     
 }

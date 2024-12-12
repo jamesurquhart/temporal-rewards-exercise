@@ -48,11 +48,20 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
             
             //TODO Need to handle ContinueAsNew
             
+            Workflow.await(() -> this.rewardsAccount.isCancelled);
+            
             if (this.rewardsAccount.isCancelled) {
-                System.out.print("Account cancelled");
+                System.out.print("\nAccount cancelled\n");
                 return;
             }
             
+            /*
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {      
+               System.out.printf("Sleep in createRewardsProgram interrupted\n\n%s", e);
+            }
+            */
         }        
     }
     
@@ -60,7 +69,7 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
     public void addPoints(long earnedPoints) {
         System.out.printf("\naddPoints signal received in workflow for %s points\n", earnedPoints);
         this.rewardsAccount = updateActivity.addPoints(rewardsAccount, earnedPoints);
-        System.out.print("\naddPoints signal completed");
+        System.out.printf("\naddPoints signal completed. New points are %s\n", this.rewardsAccount.getPoints());
  
     }
     
@@ -71,6 +80,7 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
     
     @Override
     public RewardsAccount getRewardsProgramData() {
+        System.out.print("\ngetRewardsProgramData called in RewardsWorkflowImpl\n");
         return this.rewardsAccount;
     }
     

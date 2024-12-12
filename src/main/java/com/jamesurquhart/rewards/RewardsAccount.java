@@ -13,19 +13,19 @@ import java.util.UUID;
 public class RewardsAccount {
     enum Status {BASIC,GOLD,PLATINUM}
     
-    long ID;
+    long id;
     String name;
     String joinDate;
     Status status;
     long points;
     boolean isCancelled;
     
-    void setID(long ID) {
-        this.ID = ID;
+    void setId(long id) {
+        this.id = id;
     }
     
-    long getID() {
-        return this.ID;
+    long getId() {
+        return this.id;
     }
     
     void setName (String name) {
