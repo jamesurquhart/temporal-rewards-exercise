@@ -11,9 +11,9 @@ public class UpdateRewardsActivityImpl implements UpdateRewardsActivity {
         System.out.printf("\naddPoints function executed in UpdateRewardsActivity for %s points\n", pointsEarned);
         account.addPoints(pointsEarned);
         
-        if ((account.getPoints() >= 0) && (account.getPoints() <500)) {
+        if ((account.getPoints() >= 0) && (account.getPoints() < 500)) {
             account.setStatus(RewardsAccount.Status.BASIC);
-        } else if ((account.getPoints() >= 501) && (account.getPoints() <1000)) {
+        } else if ((account.getPoints() >= 501) && (account.getPoints() < 1000)) {
             account.setStatus(RewardsAccount.Status.GOLD);
         } else {
             account.setStatus(RewardsAccount.Status.PLATINUM);
