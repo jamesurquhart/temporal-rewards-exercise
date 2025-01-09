@@ -3,9 +3,10 @@ package com.jamesurquhart.rewards;
 import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowStub;
 import io.temporal.serviceclient.WorkflowServiceStubs;
-import io.temporal.serviceclient.WorkflowServiceStubsOptions;
-import io.temporal.workflow.Workflow;
-import java.time.Duration;
+//import io.temporal.serviceclient.WorkflowServiceStubsOptions;
+//import io.temporal.workflow.Workflow;
+//import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -37,6 +38,8 @@ public class SimpleRewardsProgramActions {
         System.out.printf("\nID for this account is %s", String.valueOf(rewardsAccount.ID));
         */
         
+        TimeUnit.SECONDS.sleep(15);
+        
         System.out.print("\naddPoints signal attempted\n");
         workflow.addPoints(501);
         System.out.print("\ngetRewardsProgramData attempted\n");
@@ -45,6 +48,8 @@ public class SimpleRewardsProgramActions {
         rewardsAccount = workflow.getRewardsProgramData();
         System.out.printf("\n501 points added. New balance is %s. New status is %s", rewardsAccount.points, rewardsAccount.status.toString());
         */
+
+       TimeUnit.SECONDS.sleep(15);
 
         workflow.addPoints(501);
         System.out.print("\naddPoints signal sent a second time. Checking getRewardsProgramData Query next.\n");

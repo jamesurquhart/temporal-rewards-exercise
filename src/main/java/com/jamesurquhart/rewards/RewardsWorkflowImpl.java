@@ -45,7 +45,7 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
         
         this.rewardsAccount = account;
         
-        System.out.print("Entering createRewardsProgram loop");
+        System.out.print("Entering createRewardsProgram loop\n");
         while (true) {
             
             /* TODO Handle signals here by recording signal received on 
@@ -54,12 +54,12 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
             
             //TODO Need to handle ContinueAsNew
             
-            //Workflow.await(() -> this.rewardsAccount.isCancelled);
+            Workflow.await(() -> !this.rewardsAccount.activityList.isEmpty());
             
-            if (this.rewardsAccount.activityList.size() > 0) {
+            //if (!this.rewardsAccount.activityList.isEmpty()) {
                 ActivityPair pair = this.rewardsAccount.activityList.removeFirst();
                 this.processActivity(pair);
-            }
+            //}
             
             if (this.rewardsAccount.isCancelled) {
                 System.out.print("\nAccount cancelled\n");
@@ -78,6 +78,11 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
     
     @Override
     public void addPoints(long earnedPoints) {
+         if (this.rewardsAccount == null) {
+             System.out.print("No account passed to addPoints");
+             return;
+        }
+         
         System.out.printf("\naddPoints signal received in workflow for %s points\n", earnedPoints);
         this.rewardsAccount.addActivity("addPoints", String.valueOf(earnedPoints));
         System.out.printf("\naddPoints signal completed. New points are %s\n", this.rewardsAccount.getPoints());
@@ -86,6 +91,10 @@ public class RewardsWorkflowImpl implements RewardsWorkflow {
     
     @Override
     public void cancelRewardsProgram() {
+         if (this.rewardsAccount == null) {
+            System.out.print("rewardsAccount null in createReward");
+            return;
+        }
         this.rewardsAccount.addActivity("cancelRewardsProgram", null);
     }
     
